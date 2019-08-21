@@ -45,8 +45,6 @@ class TestOSDs(object):
 
     def _get_osd_id_from_host(self, node, osd_tree):
         children = []
-        #short_hostname = node['vars']['inventory_hostname'].split(".")[0]
-        print(node['facts'])
         short_hostname = node['facts']['ansible_hostname']
         for n in osd_tree['nodes']:
             if n['name'] == short_hostname and n['type'] == 'host':  # noqa E501

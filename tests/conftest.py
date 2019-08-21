@@ -19,6 +19,7 @@ def node(host, node_facts, request):
     ceph_version = ansible_vars.get("ceph_version", "nautilus")
     group_names = ansible_vars["group_names"]
     is_containerized = ansible_vars.get("is_containerized")
+    container_binary = ansible_vars.get("container_binary")
     num_osd_ports = 4
     if ceph_version in ['luminous', 'mimic']:
         num_osd_ports = 2
@@ -52,6 +53,7 @@ def node(host, node_facts, request):
     address = host.interface(public_interface).addresses[0]
     subnet = ".".join(ansible_vars["public_network"].split(".")[0:-1])
     num_mons = len(ansible_vars["groups"]["mons"])
+    radosgw_num_instances = ansible_vars.get("radosgw_num_instances", 1)
     num_osds = len(ansible_vars.get("devices", []))
     if not num_osds:
         num_osds = len(ansible_vars.get("lvm_volumes", []))
@@ -87,6 +89,11 @@ def node(host, node_facts, request):
         osds=osds,
         has_cluster_network=cluster_interface != public_interface,
         facts=node_facts['ansible_facts'],
+        is_containerized=is_containerized,
+        container_binary=container_binary,
+        public_interface=public_interface,
+        cluster_interface=cluster_interface,
+        radosgw_num_instances=radosgw_num_instances,
     )
     return data
 
