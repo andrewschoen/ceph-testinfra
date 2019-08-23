@@ -21,4 +21,4 @@ and that ansible config will give provided for the following.
 
 .. _testinfra: https://testinfra.readthedocs.io/en/latest/
 .. _ceph-volume: https://github.com/ceph/ceph
-.. _ceph-ansibel: https://github.com/ceph/ceph-ansible
+.. _ceph-ansible: https://github.com/ceph/ceph-ansible
